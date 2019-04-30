@@ -1,0 +1,52 @@
+{% load staticfiles %} <!-- loads stylesheets from static folder-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{% static 'bootstrap.min.css'%}"
+              rel="stylesheet">
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'style.css' %}" >
+        <title>TreasureGram</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top text-center">
+            <a href="/">
+                <img src="{% static 'images/iceFox.jpg' %}" align="left" width="50%" alt="TreasureGram">
+            </a>
+        </nav>
+        <main class="container" role="main">
+            <div class="panel panel-default">
+                {% for treasure in treasures %}
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ treasure.name }}</h2>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Material:
+                            </th>
+                            <td align="left">{{ treasure.material }}</td>
+                        </tr>
+                        <tr>
+                            <th>Value:</th>
+                            <td align="left">
+                                {% if treasure.value > 0 %}
+                                    {{ treasure.value }}
+                                {% else %}
+                                    {{ 'unknown' }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Location:</th>
+                            <td align="left">{{ treasure.location }}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </body>
+</html>
